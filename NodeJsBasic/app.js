@@ -20,18 +20,18 @@ function rqListener(req, res) {
             body.push(chunk);
         }); // waiting on data from stream
 
-        req.on('end', () => {
+        return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString(); 
 
             const message = parsedBody.split('=')[1]; // because body contians key name = value, we need only value there is only message=XXX
             
             fs.writeFileSync('message.text', message); // it has to be moved here not after req.on because in another way it could be call to early
+            res.statusCode = 302; //redirection
+            res.setHeader('Location', '/');
+    
+            return res.end(); //this returning allows to avoid executing the rest lines
         }); // event which will call when the stream will finish
 
-        res.statusCode = 302; //redirection
-        res.setHeader('Location', '/');
-
-        return res.end(); //this returning allows to avoid executing the rest lines
     }
 
     res.setHeader('Content-Type', 'text/html'); 
