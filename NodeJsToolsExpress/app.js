@@ -12,6 +12,7 @@
 
  app.use((req,res,next)=> {
     console.log('Another middleware!');
+    res.send('<h1>Hello from express! </h1>'); // default response haader has type /text/html
  });
 
  const server = http.createServer(app); // we pass function which is handler to running server  
