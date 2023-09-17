@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParaser.urlencoded({extended: false})); //this makes parsing request for us and then it will call next(), in the previous section we did by ourselfes
 
 //order has matter! 
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use((req,res, next) => {
