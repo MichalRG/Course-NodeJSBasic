@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.set('view engine', 'pug'); //setting global values which nodejs understand
+//view engine is one pre-defined value (same as views)
+// app.set('views', 'views'); //vies it's default that why this confiugration value we didnt set earlier 
+
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
