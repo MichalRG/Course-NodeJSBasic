@@ -9,6 +9,7 @@ const shopRoutes = require('./routes/shop');
 const app = express();
 
 app.use(bodyParaser.urlencoded({extended: false})); //this makes parsing request for us and then it will call next(), in the previous section we did by ourselfes
+app.use(express.static(path.join(__dirname, 'public'))); //it will take any request and tries to find some file in that directory
 
 //order has matter! 
 app.use('/admin', adminRoutes);
