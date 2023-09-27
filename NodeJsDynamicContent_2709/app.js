@@ -2,10 +2,14 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
 
 const app = express();
 
-app.set('view engine', 'pug'); //setting global values which nodejs understand
+//registering new template engines not build in express (pug was already builded in )
+app.engine('handlebars', expressHbs()); // we have to tell express js that we installed such handlebars template enginge
+app.set('view engine', 'handlebars');
+// app.set('view engine', 'pug'); //setting global values which nodejs understand
 //view engine is one pre-defined value (same as views)
 // app.set('views', 'views'); //vies it's default that why this confiugration value we didnt set earlier 
 
