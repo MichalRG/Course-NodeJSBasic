@@ -1,0 +1,7 @@
+.main-list {
+    list-style: lower-greek;
+    /* display: flex; */
+}
+.main__item {
+    color: #36b5d1;
+}
