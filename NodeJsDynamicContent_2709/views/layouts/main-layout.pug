@@ -11,7 +11,7 @@ html(lang="en")
             nav.main-header__nav 
                 ul.main-header__item-list 
                     li.main-header__item 
-                        a(href="/") Shop <!--() <- adding attributes to html content-->
+                        a(href="/", class=(path==='/' ? 'active' : '')) Shop <!--() <- adding attributes to html content-->
                     li.main-header__item 
-                        a(href="/admin/add-product") Add product
+                        a(href="/admin/add-product", class=(path==='/admin/add-product' ? 'active' : '')) Add product <!-- putthing () means we expect js code inside -->
         block content
