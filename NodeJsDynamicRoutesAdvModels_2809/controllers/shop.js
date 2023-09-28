@@ -20,6 +20,10 @@ exports.getIndex = (req, res, next) => {
   });
 };
 
+exports.getProduct =  (req, res, next) => {
+  const prodId = req.params.productId;
+};
+
 exports.getCart = (req, res, next) => {
   res.render('shop/cart', {
     path: '/cart',
