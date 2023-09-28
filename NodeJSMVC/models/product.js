@@ -3,46 +3,39 @@ const path = require('path');
 
 const products = [];
 
+const pathToManage = path.join(
+    path.dirname(process.mainModule.filename),
+    'data',
+    'product.json'
+);
+
+const getProductsFromFile = (cb) => {
+    fs. readFile(pathToManage, (err, fileContent) => {
+        if (err || !fileContent) {
+            return cb([]);
+        }
+
+        cb(JSON.parse(fileContent));
+    });
+}
+
 module.exports = class Product {
     constructor(title) {
         this.title = title;
     }
 
     save() {
-        const pathToManage = path.join(
-            path.dirname(process.mainModule.filename),
-            'data',
-            'product.json'
-        );
-        
-        fs.readFile(pathToManage, (err, fileContent) => {
-            let products = [];
-
-            if (!err) {
-                products = JSON.parse(fileContent);
-            }
-
+        getProductsFromFile(products => {
             products.push(this); 
 
             fs.writeFile(pathToManage, JSON.stringify(products), (err) => {
-                console.error(err);
+                if (err) 
+                    console.error(err);
             });
         });
     }
 
     static fetchAll(cb) {
-        const pathToRead = path.join(
-            path.dirname(process.mainModule.filename),
-            'data',
-            'product.json'
-        );
-
-        fs. readFile(pathToRead, (err, fileContent) => {
-            if (err || !fileContent) {
-                return cb([]);
-            }
-
-            cb(JSON.parse(fileContent));
-        });
+      getProductsFromFile(cb);
     }
 }
