@@ -8,6 +8,18 @@ const pathToData = path.join(
 );
 
 module.exports = class Cart {
+    static getCart(cb) {
+        fs.readFile(pathToData, (err, fileContent) => {
+            const cart = JSON.parse(fileContent);
+
+            if (err) {
+                console.log(err);
+            }
+            
+            cb(cart);
+        });
+    }
+
     static addProduct(id, productPrice) {
         // Fetch the previous cart
         fs.readFile(pathToData, (err, fileContent) => {
